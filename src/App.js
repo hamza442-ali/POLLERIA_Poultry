@@ -6,9 +6,8 @@ import {
   Route, //npm install react-router-dom
 } from "react-router-dom";
 
-// import {LandingPage} from './pages/landingPage/LandingPage'
-
 import { AddOrder } from "./components/form/PlaceOrder";
+import { Signin } from "./components/form/Login";
 
 
 function App() {
@@ -16,8 +15,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-
-          <Route path="/" element={<AddOrder />} />
+          <Route path="/" element={<Signin/>} />
+          <Route path="/home" element={<AddOrder/>} />
         
         </Routes>
       </BrowserRouter>

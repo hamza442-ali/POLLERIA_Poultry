@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AddOrderForm } from './PlaceOrderForm';
 import { db } from '../../firebase'; 
 import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 export const AddOrder = () => {
   const [orders, setOrders] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate(); // Hook for navigation
 
   // Fetch orders from Firestore
   useEffect(() => {
@@ -71,6 +73,13 @@ export const AddOrder = () => {
     );
   });
 
+  // Logout function
+  const handleLogout = () => {
+    // Clear any authentication state if needed
+    // Navigate to home page
+    navigate('/');
+  };
+
   return (
     <>
       <div className='p-8 ml-4 mt-14 rounded-3xl shadow-lg mr-4 bg-neutral-100 md:ml-32 md:mr-32'>
@@ -85,6 +94,9 @@ export const AddOrder = () => {
         <div className="p-4">
           {showForm && <AddOrderForm onClose={() => setShowForm(false)} onSubmit={handleAddOrder} />}
           <h1 className="text-2xl font-bold mb-8">POLLERIA Live Poultry </h1>
+          <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded float-right text-base font-normal">
+            Logout
+          </button>
           <div className="flex flex-col md:flex-row justify-between mb-4">
             <div className="flex mb-4 md:mb-0">
               <input 
